@@ -1,0 +1,12 @@
+Aspirational homework:
+
+* Implement multiple checkboxes
+* Set up GitHub and SSH
+  Either through GitHub Desktop or via terminal
+  https://help.github.com/en/github/authenticating-to-github/connecting-to-github-with-ssh
+  MAAAAYBE https://www.youtube.com/watch?v=QFEpsMMpAX0
+
+Next time:
+
+* Review multiple checkboxes implementation
+* ✅ Deploy

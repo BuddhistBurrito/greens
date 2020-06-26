@@ -1,0 +1,46 @@
+‹!DOCTYPE html› 
+‹html›
+‹head›
+
+‹title›JAVASCRIPT ‹/title›
+
+‹/head›
+‹body›
+‹p›Här står nåt‹/p›
+‹p id="p2"›Nåt med ett id‹/p›
+
+
+	// Jag vill veta vad usern tycker. Jag vill ha en skrivrad. 
+	// Jag behöver ett id som heter userInput
+	// userinput = det usern skriver i raden
+	‹input type="text" id=userInput"›
+
+	// Nedan kommer knappen visas/heta Click Me
+	‹button onclick="myfunc('userInput')"› Click Me ‹/button›
+
+‹script›
+
+	
+	// var är en genväg för text som är återkommande.
+
+	var pInfo = document.getElementbyID("p2") .innerHTML;
+	document.write(pInfo) ;
+
+	// Ovan i parantesem pInfo = argument = data passed into a method/function's parameters
+	// Nedan blir inputId en parameter = variable in a method definition 
+	// Since I want input I need function med textvalue. Stores the skrivrad to a variable
+
+	function myFunc(inputId) {
+	var textValue = document.getElementByID(inputId) .value;
+
+	// Nu är userInput en variable och heter textValue
+	// Nedan ändras innerHTML of p2 to be equal to textValue
+
+	document.getElementById("p2") .innerHTML = textValue;
+	}
+
+
+‹/script›
+
+‹/body›
+‹/html›

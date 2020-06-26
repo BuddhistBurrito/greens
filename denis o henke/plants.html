@@ -1,0 +1,131 @@
+<html>
+<head>
+    <title>🌱</title>
+    <style>
+      body { 
+        font-family: Helvetica, Arial, sans-serif;
+      }
+    </style>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
+</head>
+<body>
+    <div>
+      <div>
+        <label>
+          <input type="checkbox" id="budgetFilter" />
+          Only show me cheap plants
+        </label>
+      </div>
+      <div>
+        <label>
+          <input type="checkbox" id="benoitFilter" />
+          Only show me plants that Benoit sells
+        </label>
+      </div>
+      <div>
+        <label>
+          <input type="checkbox" id="indoorFilter" />
+          Only show me indoor plants
+        </label>
+      </div>
+    </div>
+
+    <div id="plants"></div>
+    <script>
+        let plants = [
+          { name: "Monstera", price: 50.0, seller: { name: "denis" }, indoor: true },
+          { name: "Chinese Evergreen", price: 50.0, seller: { name: "benoit" }, indoor: false },
+          { name: "Spider plant", price: 40.0, seller: { name: "benoit" }, indoor: true },
+          { name: "Coffee plant", price: 30.0, seller: { name: "henrik" }, indoor: false },
+        ]
+
+        displayPlants(plants);
+
+        function displayPlants(thePlants) {
+          let plantsDiv = document.getElementById("plants");
+
+          let plantsString = "";
+          plantsString += '<div class="container">';
+          plantsString += '<div class="row">';
+          // plantsString += "<table>";
+
+          // plantsString += "<tr>";
+          // plantsString += "<th>Plant name</th>";
+          // plantsString += "<th>Price</th>";
+          // plantsString += "<th>Seller</th>";
+          // plantsString += "<th>Indoor</th>";
+          // plantsString += "</tr>";
+
+          thePlants.forEach((plant) => {
+            // plantsString += "<tr>"
+            // plantsString += "<td>" + plant.name + "</td>"
+            // plantsString += "<td>" + plant.price + "</td>"
+            // plantsString += "<td>" + plant.seller.name + "</td>"
+            // plantsString += "<td>" + plant.indoor + "</td>"
+            // plantsString += "</tr>"
+
+            let badgeColor = plant.indoor ? "primary" : "secondary";
+
+            plantsString += '<div class="col-12 col-sm-6 col-lg-4 mb-5">';
+            plantsString += '<div class="card">';
+            plantsString += '<div class="card-header">';
+            plantsString += 'Plant';
+            plantsString += '</div>';
+            plantsString += '<div class="card-body">';
+            plantsString += `<h5 class="card-title">${plant.name}<span class="badge badge-${badgeColor} ml-2">${plant.indoor ? "Indoor" : "Outdoor"}</span></h5>`;
+            // plantsString += '<h5 class="card-title">' + plant.name + '<span class="badge badge-' + badgeColor + ' ml-2">' + (plant.indoor ? "Indoor" : "Outdoor") + '</span></h5>';
+            plantsString += '<p class="card-text">';
+            plantsString += 'INSERT DESCRIPTION HERE';
+            plantsString += '</p>';
+            plantsString += '<p class="card-text">';
+            plantsString += '€' + plant.price;
+            plantsString += '</p>';
+            plantsString += '<p class="card-text">';
+            plantsString += 'Sold by ' + plant.seller.name;
+            plantsString += '</p>';
+            plantsString += '</div>';
+            plantsString += '</div>';
+          plantsString += "</div>";
+          })
+
+          // plantsString += "</table>";
+          plantsString += "</div>";
+          plantsString += "</div>";
+
+          plantsDiv.innerHTML = plantsString;
+        }
+
+        function update() {
+          let isOnlyCheapChecked = document.getElementById("budgetFilter").checked;
+          let isOnlyBenoitChecked = document.getElementById("benoitFilter").checked;
+          let isOnlyIndoorChecked = document.getElementById("indoorFilter").checked;
+
+          function shouldInclude(plant) {
+            if (isOnlyCheapChecked && plant.price > 45) {
+              return false;
+            }
+
+            if (isOnlyBenoitChecked && plant.seller.name !== "benoit") {
+              return false;
+            }
+
+            if (isOnlyIndoorChecked && plant.indoor === false) {
+              return false;
+            }
+
+            return true;
+          }
+
+          let matchingPlants = plants.filter(shouldInclude);
+
+          displayPlants(matchingPlants);
+        }
+
+        document.getElementById("budgetFilter").addEventListener('change', update);
+        document.getElementById("benoitFilter").addEventListener('change', update);
+        document.getElementById("indoorFilter").addEventListener('change', update);
+        
+</script>
+</body>
+</html>
+
